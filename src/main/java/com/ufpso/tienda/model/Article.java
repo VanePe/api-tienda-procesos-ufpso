@@ -11,7 +11,8 @@ public class Article {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idArticle;
 
-    @ManyToOne @JoinColumn(name = "idCategory")
+    @ManyToOne (cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "idCategory",referencedColumnName = "idCategory")
     private Category category;
 
     private String nameArticle;
