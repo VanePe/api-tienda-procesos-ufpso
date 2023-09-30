@@ -33,7 +33,7 @@ public class CategoryController{
 
     @DeleteMapping("categories/{id}")
     public ResponseEntity<String> delete(Long id){
-        return new ResponseEntity(categoryService.deleteCategory(id), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(Boolean.toString(categoryService.deleteCategory(id)), HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("categories")
