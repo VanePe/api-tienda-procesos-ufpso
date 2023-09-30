@@ -1,6 +1,7 @@
-package com.ufpso.tienda.model.repository;
+package com.ufpso.tienda.controller;
 
 import com.ufpso.tienda.model.Category;
+import com.ufpso.tienda.service.CategoryService;
 import com.ufpso.tienda.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 public class CategoryController{
     @Autowired
-    private CategoryController categoryService;
+    private CategoryService categoryService;
 
     @GetMapping("categories/{id}")
     public ResponseEntity<Category> getCategoryById(@PathVariable Long id){
@@ -27,12 +28,12 @@ public class CategoryController{
 
     @PutMapping("categories/{id}")
     public ResponseEntity<Category> update(@RequestBody Category category, @PathVariable Long id){
-        return new ResponseEntity<>(categoryService.updateCategory(id). HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.updateCategory(category, id), HttpStatus.OK);
     }
 
     @DeleteMapping("categories/{id}")
     public ResponseEntity<String> delete(Long id){
-        return new ResponseEntity(categoryService.deleteCategory(id), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(Boolean.toString(categoryService.deleteCategory(id)), HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("categories")

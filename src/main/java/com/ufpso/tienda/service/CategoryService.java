@@ -1,5 +1,6 @@
-package com.ufpso.tienda.model.repository;
+package com.ufpso.tienda.service;
 
+import com.ufpso.tienda.repository.CategoryRepository;
 import com.ufpso.tienda.model.Category;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class CategoryService{
     public Category updateCategory(Category categoryReq, Long id){
         Optional<Category> categoryBd = categoryRepository.findById(id);
         if(categoryBd.isEmpty()){
-            return false;
+            return null;
         }
         categoryBd.get().setNameCategory(categoryReq.getNameCategory());
         return categoryRepository.save(categoryBd.get());
