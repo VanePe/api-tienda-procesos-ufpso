@@ -1,5 +1,6 @@
-package com.ufpso.tienda.model.repository;
+package com.ufpso.tienda.service;
 
+import com.ufpso.tienda.repository.CategoryRepository;
 import com.ufpso.tienda.model.Category;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;

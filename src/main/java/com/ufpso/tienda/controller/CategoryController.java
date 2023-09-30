@@ -1,6 +1,7 @@
-package com.ufpso.tienda.model.repository;
+package com.ufpso.tienda.controller;
 
 import com.ufpso.tienda.model.Category;
+import com.ufpso.tienda.service.CategoryService;
 import com.ufpso.tienda.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
