@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -17,7 +16,7 @@ public class ArticleController {
 
     @GetMapping("articles/{id}")
     public ResponseEntity<Article> getArticleById(@PathVariable Long id){
-            return new ResponseEntity<>(articleService.getArticleById(id), HttpStatus.OK);
+        return new ResponseEntity<>(articleService.getArticleById(id), HttpStatus.OK);
     }
 
     @GetMapping("articles")
