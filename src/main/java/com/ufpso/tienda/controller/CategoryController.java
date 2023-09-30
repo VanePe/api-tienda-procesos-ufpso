@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class CategoryController{
     @Autowired
-    private CategoryController categoryService;
+    private CategoryService categoryService;
 
     @GetMapping("categories/{id}")
     public ResponseEntity<Category> getCategoryById(@PathVariable Long id){
@@ -27,7 +27,7 @@ public class CategoryController{
 
     @PutMapping("categories/{id}")
     public ResponseEntity<Category> update(@RequestBody Category category, @PathVariable Long id){
-        return new ResponseEntity<>(categoryService.updateCategory(id). HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.updateCategory(category, id). HttpStatus.OK);
     }
 
     @DeleteMapping("categories/{id}")

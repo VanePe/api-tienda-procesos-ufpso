@@ -24,7 +24,7 @@ public class CategoryService{
     public Category updateCategory(Category categoryReq, Long id){
         Optional<Category> categoryBd = categoryRepository.findById(id);
         if(categoryBd.isEmpty()){
-            return false;
+            return null;
         }
         categoryBd.get().setNameCategory(categoryReq.getNameCategory());
         return categoryRepository.save(categoryBd.get());
