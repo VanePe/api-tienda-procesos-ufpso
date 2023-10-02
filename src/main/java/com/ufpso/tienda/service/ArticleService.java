@@ -25,8 +25,7 @@ public class ArticleService {
     }
 
     public Article createArticle(Article article){
-        Article articleCreated = articleRepository.save(article);
-        return getArticleById(articleCreated.getIdArticle());
+        return articleRepository.save(article);
     }
 
     public Article updateArticle(Article articleReq,Long id){
