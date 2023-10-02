@@ -16,7 +16,9 @@ public class ArticleController {
 
     @GetMapping("articles/{id}")
     public ResponseEntity<Article> getArticleById(@PathVariable Long id){
-        return new ResponseEntity<>(articleService.getArticleById(id), HttpStatus.OK);
+        Article articleBd = articleService.getArticleById(id);
+        HttpStatus status = (articleBd != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
+        return new ResponseEntity<>(articleBd, status);
     }
 
     @GetMapping("articles")
@@ -31,7 +33,9 @@ public class ArticleController {
 
     @PutMapping("articles/{id}")
     public ResponseEntity<Article> update(@RequestBody Article articleReq, @PathVariable Long id){
-        return new ResponseEntity<>(articleService.updateArticle(articleReq,id),HttpStatus.OK);
+        Article articleUpdate = articleService.updateArticle(articleReq,id);
+        HttpStatus status = (articleUpdate != null) ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<>(articleUpdate,status);
     }
 
     @DeleteMapping("articles/{id}")

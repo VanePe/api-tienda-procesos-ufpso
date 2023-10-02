@@ -5,7 +5,6 @@ import com.ufpso.tienda.model.Category;
 import com.ufpso.tienda.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +14,6 @@ public class ArticleService {
 
     @Autowired
     private ArticleRepository articleRepository;
-    @Autowired
-    private CategoryService categoryService;
 
     public Article getArticleById(Long id){
         Optional<Article> articleBd = articleRepository.findById(id);
@@ -28,12 +25,8 @@ public class ArticleService {
     }
 
     public Article createArticle(Article article){
-        //Obtener la categoria asociada al id que se envio
-        Category categoryBd = categoryService.getCategoryById(article.getCategory().getIdCategory());
-        if (categoryBd == null)
-            return null;
-        article.setCategory(categoryBd);
-        return articleRepository.save(article);
+        Article articleCreated = articleRepository.save(article);
+        return getArticleById(articleCreated.getIdArticle());
     }
 
     public Article updateArticle(Article articleReq,Long id){
