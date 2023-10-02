@@ -36,7 +36,7 @@ public class CategoryService{
         if(categoryBd.isEmpty()){
             return false;
         }
-        categoryRepository.delete(categoryBd.get());
+        categoryRepository.deleteById(categoryBd.get().getIdCategory());
         return true;
     }
 
