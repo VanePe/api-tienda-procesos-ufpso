@@ -14,6 +14,8 @@ public class ArticleService {
 
     @Autowired
     private ArticleRepository articleRepository;
+    @Autowired
+    private CategoryService categoryService;
 
     public Article getArticleById(Long id){
         Optional<Article> articleBd = articleRepository.findById(id);
@@ -24,8 +26,17 @@ public class ArticleService {
         return (List<Article>) articleRepository.findAll();
     }
 
-    public Article createArticle(Article article){
-        return articleRepository.save(article);
+    public Article createArticle(Article article, Long idCategory){
+        try{
+            Category category = categoryService.getCategoryById(idCategory);
+            article.setCategory(category);
+            return articleRepository.save(article);
+        }catch (Exception ex){
+            System.out.println("Aqui esta el problema");
+            ex.printStackTrace(System.out);
+        }
+        return null;
+
     }
 
     public Article updateArticle(Article articleReq,Long id){

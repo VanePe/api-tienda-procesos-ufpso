@@ -26,9 +26,9 @@ public class ArticleController {
         return  new ResponseEntity<>(articleService.findAllArticles(),HttpStatus.OK);
     }
 
-    @PostMapping("articles")
-    public ResponseEntity<Article> create(@RequestBody Article article){
-        return new ResponseEntity<>(articleService.createArticle(article),HttpStatus.CREATED);
+    @PostMapping("articles/{idCategory}")
+    public ResponseEntity<Article> create(@RequestBody Article article, @PathVariable Long idCategory){
+        return new ResponseEntity<>(articleService.createArticle(article, idCategory),HttpStatus.CREATED);
     }
 
     @PutMapping("articles/{id}")
