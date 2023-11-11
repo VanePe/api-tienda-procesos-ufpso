@@ -2,6 +2,7 @@ package com.ufpso.tienda.controller;
 
 import com.ufpso.tienda.model.Article;
 import com.ufpso.tienda.service.ArticleService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +24,11 @@ public class ArticleController {
 
     @GetMapping("articles")
     public ResponseEntity<List<Article>> findAll(){
-        return  new ResponseEntity<>(articleService.findAllArticles(),HttpStatus.OK);
+        return new ResponseEntity<>(articleService.findAllArticles(),HttpStatus.OK);
     }
 
     @PostMapping("articles/{idCategory}")
-    public ResponseEntity<Article> create(@RequestBody Article article, @PathVariable Long idCategory){
+    public ResponseEntity<Article> create(@Valid @RequestBody Article article, @PathVariable Long idCategory){
         return new ResponseEntity<>(articleService.createArticle(article, idCategory),HttpStatus.CREATED);
     }
 
