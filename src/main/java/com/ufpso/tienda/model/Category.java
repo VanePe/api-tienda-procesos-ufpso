@@ -8,11 +8,14 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "CATEGORIES")
+@Table(
+        name = "CATEGORIES"
+)
 public class Category{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategory;
+
     private String nameCategory;
 
     @JsonIgnore

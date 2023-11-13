@@ -5,9 +5,9 @@ import com.ufpso.tienda.model.Article;
 import com.ufpso.tienda.model.Category;
 import com.ufpso.tienda.repository.ArticleRepository;
 import com.ufpso.tienda.util.ExepctionsConstans;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +20,8 @@ public class ArticleService {
     private CategoryService categoryService;
 
     public Article getArticleById(Long id){ //Bucar por ID
+        if(id == null)
+            throw new NotFoundException(ExepctionsConstans.ARTICLE_IS_NULL.getMessage());
         Optional<Article> articleBd = articleRepository.findById(id);
         if(articleBd.isEmpty())
             throw new NotFoundException(ExepctionsConstans.ARTICLE_NOT_FOUND.getMessage());
@@ -37,6 +39,8 @@ public class ArticleService {
     }
 
     public Article updateArticle(Article articleReq,Long id){
+        if( id == null )
+            throw new NotFoundException(ExepctionsConstans.ARTICLE_IS_NULL.getMessage());
         Optional<Article> articleBd = articleRepository.findById(id);
         if(articleBd.isEmpty())
             throw new RuntimeException(ExepctionsConstans.ARTICLE_NOT_FOUND.getMessage());
@@ -44,15 +48,16 @@ public class ArticleService {
         articleBd.get().setDescriptionArticle(articleReq.getDescriptionArticle());
         articleBd.get().setStock(articleReq.getStock());
         articleBd.get().setPriceArticle(articleReq.getPriceArticle());
+
+        Category categoryBd = categoryService.getCategoryById(articleReq.getCategory().getIdCategory());
+        articleReq.setCategory(categoryBd);
         articleBd.get().setCategory(articleReq.getCategory());
         return articleRepository.save(articleBd.get());
     }
 
     public boolean deleteArticle(Long id){
-        Optional<Article> articleBd = articleRepository.findById(id);
-        if(articleBd.isEmpty())
-            throw new RuntimeException(ExepctionsConstans.ARTICLE_NOT_FOUND.getMessage());
-        articleRepository.deleteById(articleBd.get().getIdArticle());
+        Article article = this.getArticleById(id);
+        articleRepository.delete(article);
         return true;
     }
 
