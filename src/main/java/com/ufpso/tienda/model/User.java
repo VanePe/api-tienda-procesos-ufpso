@@ -11,6 +11,9 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(
+        name = "Users"
+)
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +32,7 @@ public class User {
     @Email(message = "email no valid")
     private String email;
 
-    @JsonIgnore
+    //@JsonIgnore
     @NotNull(message = "Password is required")
     @Size(min = 8, max = 15,message = "password min 8 characters and max 15")
     private String password;

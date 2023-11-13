@@ -33,21 +33,19 @@ public class UserService {
 
     //Metodo para actializar un usuario
     public User updateUser(User userReq, Long id){
-        Optional<User> userBd = userRepository.findById(id);
-        if(userBd.isEmpty())
-            throw new RuntimeException(ExepctionsConstans.USER_NOT_FOUND.getMessage());
-        userBd.get().setFirstName(userReq.getFirstName());
-        userBd.get().setLastName(userReq.getLastName());
-        userBd.get().setPhone(userReq.getPhone());
-        return userRepository.save(userBd.get());
+        if( id == null)
+            throw new NotFoundException(ExepctionsConstans.USER_IS_NULL.getMessage());
+        User userBd = this.getUserById(id);
+        userBd.setFirstName(userReq.getFirstName());
+        userBd.setLastName(userReq.getLastName());
+        userBd.setPhone(userReq.getPhone());
+        return userRepository.save(userBd);
     }
 
     //Metodo para eliminar de una base de datos
     public boolean deleteUser(Long id){
-        Optional<User> userBd = userRepository.findById(id);
-        if(userBd.isEmpty())
-            throw new RuntimeException(ExepctionsConstans.USER_NOT_FOUND.getMessage());
-        userRepository.deleteById(userBd.get().getId());
+        User userBd = this.getUserById(id);
+        userRepository.deleteById(userBd.getId());
         return true;
     }
 
