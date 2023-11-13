@@ -1,8 +1,9 @@
 package com.ufpso.tienda.service;
 
+import com.ufpso.tienda.exception.NotFoundException;
 import com.ufpso.tienda.repository.CategoryRepository;
 import com.ufpso.tienda.model.Category;
-import org.springframework.data.repository.CrudRepository;
+import com.ufpso.tienda.util.ExepctionsConstans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class CategoryService{
             throw new NotFoundException(ExepctionsConstans.CATEGORY_NOT_FOUND.getMessage());
         }
         categoryBd.get().setNameCategory(categoryReq.getNameCategory());
-        categoryBd.get().setDescriptionCategory(categoryReq.getDescriptionCategory);
+        categoryBd.get().setDescriptionCategory(categoryReq.getDescriptionCategory());
         return categoryRepository.save(categoryBd.get());
     }
 
