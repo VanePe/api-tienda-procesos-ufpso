@@ -1,6 +1,7 @@
 package com.ufpso.tienda.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -8,7 +9,9 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "ARTICLES")
+@Table(
+        name = "ARTICLES"
+)
 public class Article {
 
     @Id
@@ -16,7 +19,7 @@ public class Article {
     private Long idArticle;
 
     @NotNull(message = "Name article is required")
-    @Size(max = 40, message = "Name article max 40 character")
+    @Size(min= 5, max = 40, message = "Name article min 5 y max 40 character")
     private String nameArticle;
 
     @NotNull(message = "Stock is required")
@@ -24,7 +27,7 @@ public class Article {
     private Integer stock;
 
     @NotNull(message = "Description article is required")
-    @Size(max = 200, message = "Description article max 200 character")
+    @Size(min = 5, max = 200, message = "Description article max 200 character")
     private String descriptionArticle;
 
     @NotNull(message = "Price article is required")
