@@ -14,27 +14,41 @@ public class CategoryService{
     @Autowired
     private CategoryRepository categoryRepository;
 
+    //Metodo para crear
     public Category createCategory(Category categoryReg){
         return categoryRepository.save(categoryReg);
     }
 
+    //Metodo para buscar
     public Category getCategoryById(Long id){
-        return categoryRepository.findById(id).get();
+        if (id == null) {
+            throw new NotFoundException(ExepctionsConstans.CATEGORY_NOT_FOUND.getMessage());
+        }
+        Optional<Category> category = categoryRepository.findById(id);
+        if(category.isEmpty()){
+            throw  new NotFoundException(ExepctionsConstans.CATEGORY_NOT_FOUND.getMessage());
+        }
+        return categor.get();
     }
 
+    //Metodo para actualizar
     public Category updateCategory(Category categoryReq, Long id){
         Optional<Category> categoryBd = categoryRepository.findById(id);
         if(categoryBd.isEmpty()){
-            return null;
+            throw new NotFoundException(ExepctionsConstans.CATEGORY_NOT_FOUND.getMessage());
         }
         categoryBd.get().setNameCategory(categoryReq.getNameCategory());
+        categoryBd.get().setDescriptionCategory(categoryReq.getDescriptionCategory);
         return categoryRepository.save(categoryBd.get());
     }
 
+    //Metodo para eliminar
     public boolean deleteCategory(Long id){
         Optional<Category> categoryBd = categoryRepository.findById(id);
         if(categoryBd.isEmpty()){
-            return false;
+            if(categoryBd.isEmpty()){
+                throw  new NotFoundException(ExepctionsConstans.CATEGORY_NOT_FOUND.getMessage());
+            };
         }
         categoryRepository.deleteById(categoryBd.get().getIdCategory());
         return true;
