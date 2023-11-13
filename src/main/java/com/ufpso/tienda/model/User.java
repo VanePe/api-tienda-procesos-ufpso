@@ -37,4 +37,8 @@ public class User {
     @Size(min = 8, max = 15,message = "password min 8 characters and max 15")
     private String password;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Address> addressList;
+
 }
