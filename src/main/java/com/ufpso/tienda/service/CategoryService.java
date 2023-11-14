@@ -29,7 +29,7 @@ public class CategoryService{
         if(category.isEmpty()){
             throw  new NotFoundException(ExepctionsConstans.CATEGORY_NOT_FOUND.getMessage());
         }
-        return categor.get();
+        return category.get();
     }
 
     //Metodo para actualizar
