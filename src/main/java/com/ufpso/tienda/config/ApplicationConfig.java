@@ -36,7 +36,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailService() {
         return email -> authRepository.findByEmail(email).orElseThrow(() ->
-        new NotFoundException(ExepctionsConstans.USER_NOT_FOUND.getMessage()));
+        new NotFoundException(ExepctionsConstans.CREDENTIAL_INVALID.getMessage()));
     }
 
     @Bean
