@@ -74,6 +74,10 @@ public class User implements UserDetails {
         return true;
     }
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Address> addressList;
+
     @Override
     public boolean isEnabled() {
         return true;
