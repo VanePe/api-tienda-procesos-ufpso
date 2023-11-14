@@ -25,8 +25,6 @@ public class Category{
     @Size(max = 40,message = "Name category max 40 character")
     private String nameCategory;
 
-    @NotNull(message = "Description category is required")
-    @Size(max = 225,message = "Description category max 225 characters")
     private String descriptionCategory;
 
     @JsonIgnore
