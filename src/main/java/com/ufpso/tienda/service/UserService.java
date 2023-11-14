@@ -4,7 +4,9 @@ import com.ufpso.tienda.exception.NotFoundException;
 import com.ufpso.tienda.model.User;
 import com.ufpso.tienda.repository.UserRepository;
 import com.ufpso.tienda.util.ExepctionsConstans;
+import com.ufpso.tienda.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +17,13 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     //Metodo para insertar
     public User createUser(User userReq){
+        userReq.setPassword(passwordEncoder.encode(userReq.getPassword()));
+        userReq.setRole(Role.USER);
         return userRepository.save(userReq);
     }
 

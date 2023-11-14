@@ -10,8 +10,8 @@ public enum ExepctionsConstans {
     ARTICLE_IS_NULL("Article is null"),
     USER_IS_NULL("Usser is null"),
     ADDRESS_IS_NULL("Address is null"),
-    ADDRESS_NOT_FOUND("Address not found");
-
+    ADDRESS_NOT_FOUND("Address not found"),
+    CREDENTIAL_INVALID("Invalid username or password");
 
     private final String message;
 
