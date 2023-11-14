@@ -12,7 +12,6 @@ public enum ExepctionsConstans {
     ADDRESS_IS_NULL("Address is null"),
     ADDRESS_NOT_FOUND("Address not found"),
     CREDENTIAL_INVALID("Invalid username or password"),
-    ARTICLE_IS_NULL("Article is null"),
     CATEGORY_NOT_FOUND("Category not found"),
     CATEGORY_IS_NULL("Category is null");
 
