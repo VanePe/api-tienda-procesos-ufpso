@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@Validated
 public class UserController {
 
     @Autowired
@@ -32,7 +34,7 @@ public class UserController {
 
     @PutMapping("users/{id}")
     public ResponseEntity<User> update(@Valid @RequestBody User user, @PathVariable Long id){
-        return new ResponseEntity<>(userService.updateUser(user,id), HttpStatus.OK);
+        return new ResponseEntity<>(userService.updateUser(user,id),HttpStatus.OK);
     }
 
     @DeleteMapping("users/{id}")

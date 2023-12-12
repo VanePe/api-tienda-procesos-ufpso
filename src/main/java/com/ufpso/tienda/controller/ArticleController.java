@@ -31,7 +31,7 @@ public class ArticleController {
         return new ResponseEntity<>(articleService.findAllArticles(),HttpStatus.OK);
     }
 
-    @PostMapping("articles/{idCategory}")
+    @PostMapping("articles/{id}")
     public ResponseEntity<Article> create(@Valid @RequestBody Article article, @PathVariable Long idCategory){
         return new ResponseEntity<>(articleService.createArticle(article, idCategory),HttpStatus.CREATED);
     }

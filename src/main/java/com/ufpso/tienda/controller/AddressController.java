@@ -23,18 +23,17 @@ public class AddressController {
 
     @GetMapping("address/{id}")
     public ResponseEntity<Address> getAddressById(@PathVariable Long id){
-        //return ResponseEntity.ok(addressService.getAddressById(id));
-        return new ResponseEntity<>(addressService.getAddressById(id), HttpStatus.OK);
+        return ResponseEntity.ok(addressService.getAddressById(id));
     }
 
     @GetMapping("address")
     public ResponseEntity<List<Address>> findAll(){
-        return new ResponseEntity<>(addressService.finAllAddress(),HttpStatus.OK);
+        return ResponseEntity.ok(addressService.finAllAddress());
     }
 
     @PostMapping("address/{id}")
     public ResponseEntity<Address> create(@Validated @RequestBody Address address,@PathVariable Long id){
-        return new ResponseEntity<>(addressService.createAddress(address,id),HttpStatus.CREATED);
+        return new ResponseEntity<>(addressService.createAddress(address,id), HttpStatus.CREATED);
     }
 
     @GetMapping("address/disabled/{id}")
@@ -54,4 +53,5 @@ public class AddressController {
         });
         return errors;
     }
+
 }

@@ -1,7 +1,6 @@
 package com.ufpso.tienda.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
