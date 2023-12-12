@@ -27,9 +27,12 @@ public class AddressService {
     }
 
     public Address updateStatusAddress(Long id){
-        Address addressBd = this.getAddressById(id);
-        addressBd.setStatus(Boolean.FALSE);
-        return  addressRepository.save(addressBd);
+        Optional<Address> address = addressRepository.findById(id);
+        if (address.isEmpty()){
+            throw new NotFoundException(ExepctionsConstans.ADDRESS_NOT_FOUND.getMessage());
+        }
+        address.get().setStatus(Boolean.FALSE);
+        return addressRepository.save(address.get());
     }
 
     public List<Address> finAllAddress(){
@@ -37,11 +40,10 @@ public class AddressService {
     }
 
     public Address getAddressById(Long id){
-        if( id == null)
-            throw new NotFoundException(ExepctionsConstans.ADDRESS_IS_NULL.getMessage());
-        Optional<Address> addressBd = addressRepository.findById(id);
-        if(addressBd.isEmpty())
+        Optional<Address> address = addressRepository.findById(id);
+        if (address.isEmpty()){
             throw new NotFoundException(ExepctionsConstans.ADDRESS_NOT_FOUND.getMessage());
-        return addressBd.get();
+        }
+        return address.get();
     }
 }

@@ -1,4 +1,4 @@
-package com.ufpso.tienda.util;
+package com.ufpso.tienda.model;
 
 public enum Role {
     ADMIN,

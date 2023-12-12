@@ -1,14 +1,13 @@
 package com.ufpso.tienda.controller;
 
-import com.ufpso.tienda.auth.AuthResponse;
-import com.ufpso.tienda.auth.LoginRequest;
-import com.ufpso.tienda.auth.RegisterRequest;
+import com.ufpso.tienda.dto.AuthResponse;
+import com.ufpso.tienda.dto.LoginRequest;
+import com.ufpso.tienda.model.User;
 import com.ufpso.tienda.service.AuthService;
-import com.ufpso.tienda.service.JwtService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class AuthController {
     }
 
     @PostMapping(value = "register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody User request){
         return ResponseEntity.ok(authService.register(request));
     }
 
@@ -37,7 +36,7 @@ public class AuthController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
-        final Map<String, String> errors = new HashMap<>();
+        Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();

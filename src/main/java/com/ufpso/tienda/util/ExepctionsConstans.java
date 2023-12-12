@@ -13,7 +13,8 @@ public enum ExepctionsConstans {
     ADDRESS_NOT_FOUND("Address not found"),
     CREDENTIAL_INVALID("Invalid username or password"),
     CATEGORY_NOT_FOUND("Category not found"),
-    CATEGORY_IS_NULL("Category is null");
+    CATEGORY_IS_NULL("Category is null"),
+    USER_EMAIL_EXISTS("The email is already registered");
 
 
     private final String message;
